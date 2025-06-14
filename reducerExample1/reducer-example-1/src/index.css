@@ -1,0 +1,30 @@
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.range {
+  display: flex;
+  justify-content: center;
+}
+
+.step {
+  display: flex;
+  justify-content: center;
+  justify-content: center;
+}
+.input {
+  display: flex;
+}
+.date {
+  display: flex;
+  justify-content: center;
+}
+.button {
+  display: flex;
+  justify-content: center;
+}
+button {
+  width: 100%;
+}
