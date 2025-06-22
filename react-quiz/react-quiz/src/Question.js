@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Option from "./Option";
 
 export default function Question({
@@ -9,8 +10,19 @@ export default function Question({
   length,
   score,
   handleFinish,
+  dispatch,
+  secondsRemaining,
 }) {
-  console.log(currentQuestion.correctOption + "questiondangelen trueoption");
+  useEffect(
+    function () {
+      const id = setInterval(function () {
+        dispatch({ type: "tick" });
+      }, 1000);
+
+      return () => clearInterval(id);
+    },
+    [dispatch]
+  );
   return (
     <div className="questions">
       <span className="progress-score">Score:{score}</span>
@@ -34,17 +46,25 @@ export default function Question({
           i={i}
         />
       ))}
-      {selected !== null && i < length ? (
-        <div className="next" onClick={handleClick}>
-          Next
+      <div className="footer">
+        <div className="next timer">
+          {Math.floor(secondsRemaining / 60) < 10 ? 0 : ""}
+          {Math.floor(secondsRemaining / 60)}:
+          {secondsRemaining % 60 < 10 ? 0 : ""}
+          {secondsRemaining % 60}
         </div>
-      ) : selected !== null && i === length ? (
-        <div className="next" onClick={handleFinish}>
-          Finish
-        </div>
-      ) : (
-        ""
-      )}
+        {selected !== null && i < length ? (
+          <div className="next" onClick={handleClick}>
+            Next
+          </div>
+        ) : selected !== null && i === length ? (
+          <div className="next" onClick={handleFinish}>
+            Finish
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
     </div>
   );
 }

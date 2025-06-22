@@ -2,12 +2,16 @@ import { useEffect, useReducer } from "react";
 import Intro from "./Intro";
 import Question from "./Question";
 import Finish from "./Finish";
-import { type } from "@testing-library/user-event/dist/type";
 
+const TIME_PER_QUESTION = 30;
 function reducer(state, action) {
   switch (action.type) {
     case "setQuestions":
-      return { ...state, questions: action.payload };
+      return {
+        ...state,
+        questions: action.payload,
+        secondsRemaining: state.questions.length * TIME_PER_QUESTION,
+      };
     case "setCurrentQuestion":
       return { ...state, currentQuestion: action.payload };
     case "setI":
@@ -34,7 +38,16 @@ function reducer(state, action) {
         selected: null,
         score: 0,
         finish: false,
+        secondsRemaining: state.questions.length * TIME_PER_QUESTION,
       };
+    case "tick":
+      const newSeconds = state.secondsRemaining - 1;
+      return {
+        ...state,
+        secondsRemaining: newSeconds,
+        finish: newSeconds === 0,
+      };
+
     default:
       throw new Error("Unknown action type");
   }
@@ -48,10 +61,18 @@ export default function App() {
     selected: null,
     score: 0,
     finish: false,
+    secondsRemaining: null,
   };
   const [state, dispatch] = useReducer(reducer, inials);
-  const { questions, currentQuestion, i, selected, score, finish } = state;
-  console.log(currentQuestion);
+  const {
+    questions,
+    currentQuestion,
+    i,
+    selected,
+    score,
+    finish,
+    secondsRemaining,
+  } = state;
 
   function handleClick() {
     dispatch({ type: "setCurrentQuestion", payload: state.questions[i] });
@@ -110,6 +131,8 @@ export default function App() {
           length={questions.length}
           score={score}
           handleFinish={handleFinish}
+          secondsRemaining={secondsRemaining}
+          dispatch={dispatch}
         />
       )}
       {finish === true && (

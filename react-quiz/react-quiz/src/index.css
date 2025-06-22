@@ -70,7 +70,7 @@ header {
   background-color: antiquewhite;
   padding: 1rem 2rem;
   border-radius: 2rem;
-  align-self: flex-end;
+
   cursor: pointer;
 }
 
@@ -103,4 +103,14 @@ header {
 .progress-status,
 .progress-score {
   font-size: 1.4rem;
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.timer {
+  background-color: darkgray;
+  color: white;
 }
