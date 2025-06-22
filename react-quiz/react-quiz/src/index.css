@@ -38,7 +38,8 @@ header {
   display: flex;
   gap: 2rem;
 }
-.intro {
+.intro,
+.questions {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -46,12 +47,18 @@ header {
   position: relative;
 }
 
+.questions {
+  width: 50rem;
+}
+
 .option {
-  padding: 1rem 12rem;
+  padding: 1rem 2rem;
   border: 1px solid black;
   border-radius: 5rem;
   margin-bottom: 1rem;
   cursor: pointer;
+  width: 40rem;
+  font-size: 1.4rem;
 }
 .trueAnswer {
   background-color: greenyellow;
@@ -63,9 +70,7 @@ header {
   background-color: antiquewhite;
   padding: 1rem 2rem;
   border-radius: 2rem;
-  position: absolute;
-  bottom: 0;
-  right: 0;
+  align-self: flex-end;
   cursor: pointer;
 }
 
@@ -84,5 +89,18 @@ header {
   transition: width 0.3s ease;
 }
 .resart {
+  display: flex;
   cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  font-size: 1.5rem;
+}
+.progress {
+  font-size: 2rem;
+  width: 80%;
+}
+.progress-status,
+.progress-score {
+  font-size: 1.4rem;
 }

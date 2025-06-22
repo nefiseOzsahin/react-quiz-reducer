@@ -12,10 +12,16 @@ export default function Question({
 }) {
   console.log(currentQuestion.correctOption + "questiondangelen trueoption");
   return (
-    <div className="intro">
-      Score:{score}
-      <progress value={selected === null ? i - 1 : i} max={length}></progress>
-      {i}/{length}
+    <div className="questions">
+      <span className="progress-score">Score:{score}</span>
+      <progress
+        value={selected === null ? i - 1 : i}
+        max={length}
+        className="progress"
+      ></progress>
+      <span className="progress-status">
+        {i}/{length}
+      </span>
       <p>{currentQuestion.question}</p>
       {currentQuestion.options?.map((option, index) => (
         <Option
